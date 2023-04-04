@@ -10,7 +10,7 @@ root = 'https://subslikescript.com'  # this is the homepage of the website
 website = f'{root}/movies'  # concatenating the homepage with the movies section
 result = requests.get(website)
 content = result.text
-soup = BeautifulSoup(content, 'lxml')
+soup = BeautifulSoup(content, 'html.parser')
 # print(soup.prettify())  # prints the HTML of the website
 
 # Locate the box that contains a list of movies
@@ -29,7 +29,7 @@ for link in box.find_all('a', href=True):  # find_all returns a list
 for link in links:
     result = requests.get(f'{root}/{link}')
     content = result.text
-    soup = BeautifulSoup(content, 'lxml')
+    soup = BeautifulSoup(content, 'html.parser')
 
     # Locate the box that contains title and transcript
     box = soup.find('article', class_='main-article')
